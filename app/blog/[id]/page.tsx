@@ -29,7 +29,7 @@ const SpecificBlog = ({params} : {params : {id : string}}) => {
     const fetchPost = async () => {
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/everything?q=apple&from=2024-12-26&to=2024-12-26&sortBy=popularity&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`
+          `/api/news?q=apple&from=2024-12-26&to=2024-12-26&sortBy=popularity`
         );
         const data = await response.json();
         
