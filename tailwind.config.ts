@@ -11,7 +11,22 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        main: "#7C4EE4",
+        secondary: "#333333",
+        secondarygray: "#666666",
+        secondarysilver: "#999999",
       },
+      fontFamily: {
+      Roboto : ["Roboto", "serif"],
+      Raleway : ["Raleway", "serif"],
+      },
+      screens: {
+        sm: '300px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px'
+      }
     },
   },
   plugins: [],

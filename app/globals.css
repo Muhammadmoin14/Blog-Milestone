@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,6 +8,25 @@
   --foreground: #171717;
 }
 
+h1 {
+  @apply text-6xl font-Raleway font-bold text-white
+}
+h2 {
+  @apply text-[52px] font-Raleway font-bold text-white
+}
+h3 {
+  @apply text-5xl font-Raleway font-bold text-white
+}
+h4 {
+  @apply text-3xl  font-Raleway text-white
+}
+h5 {
+  @apply text-[26px]  font-Raleway text-white
+}
+h6 {
+  @apply text-2xl font-Raleway text-white 
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -14,6 +34,11 @@
   }
 }
 
+@layer base {
+  body {
+    @apply font-Roboto;
+  }
+}
 body {
   color: var(--foreground);
   background: var(--background);
