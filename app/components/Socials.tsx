@@ -12,7 +12,7 @@ type SocialProps = {
   const socials: { icon: JSX.Element; path: string }[] = [
     { icon: <FaGithub />, path: 'https://github.com/muhammadmoin14' },
     { icon: <FaLinkedinIn />, path: 'https://linkedin.com/in/themoin' },
-    { icon: <FaInstagram />, path: 'https://instagram.com/muhammadmoin14' },
+    { icon: <FaInstagram />, path: 'https://instagram.com/muhammad_moin14' },
   ];
   
   const Social: React.FC<SocialProps> = ({ containerStyles, iconStyles }) => {
