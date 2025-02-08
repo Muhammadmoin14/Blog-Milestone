@@ -34,7 +34,7 @@ const MainBlog : React.FC<Props> = ({mainblog}) => {
   
   try {
     
-    const response = await fetch(`/api/news?q=apple&from=2024-12-26&to=2024-12-26&sortBy=popularity`)
+    const response = await fetch(`/api/news?q=apple&from=2025-01-31&to=2025-01-31&sortBy=popularity`)
     const data = await response.json()
     
     const articlesWithId = data.articles.map((article: Blog, index: number) => ({

@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import TruncateDescription from '../components/TruncateDescription';
 import Link from 'next/link';
+import BlogGridSkeleton from '../components/GridSkeletonCard';
 
 
 
@@ -32,7 +33,8 @@ const Page = () => {
 
             const fetchData = async ()=>{ 
                 try {
-                    const response = await fetch(`/api/news?q=apple&from=2024-12-26&to=2024-12-26&sortBy=popularity`)
+                    
+                    const response = await fetch(`/api/news?q=apple`);
                     const data = await response.json()
                     
                     const articlesWithId = data.articles.map((article: datatype, index: number) => ({
@@ -82,7 +84,7 @@ const Page = () => {
         articles articles for you to read them all along
         </h4>
 
-        {loading && <p className='text-center font-semibold font-Raleway'>Loading...</p>}
+        {loading && <BlogGridSkeleton count={6} />}
         {/* Grid Start */}
 
         <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-6 md:px-16 sm:px-4 w-full pt-6 ">
