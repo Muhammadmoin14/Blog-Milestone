@@ -10,7 +10,8 @@ type TruncateDescriptionProps = {
 
 const TruncateDescription: React.FC<TruncateDescriptionProps> = ({description , wordLimit}) => {
 
-    const truncateText = (text: string, limit: number) => {
+    const truncateText = (text: string | null | undefined, limit: number) => {
+        if(!text) return '';
         const words = text.split(' ');
         if (words.length > limit) {
             return words.slice(0, limit).join(' ') + '...';

@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: true, // Optional: ensures strict mode for React
     images: {
-      domains: ['gizmodo.com'], // Add any domains that you want to allow images from
+      domains: ['gizmodo.com',"img.clerk.com",],  // Add any domains that you want to allow images from
     },
   };
   

@@ -7,6 +7,8 @@ import { z } from "zod";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
+import { Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 // import SkeletonLoader from "../components/skeletonloader";
 
 // Define the schema for the form using zod
@@ -49,6 +51,7 @@ interface NewBlog {
   author: string;
   publishedAt: string;
   image?: ImageAsset;
+  status: string;
 }
 
 export default function AddBlog() {
@@ -84,6 +87,7 @@ export default function AddBlog() {
   useEffect(() => {
     setMounted(true);
   }, []);
+  
 
   const onSubmit = async (data: { title: string; description: string; content: string;  tags: string; image: File | null; }) => {
     if (!user?.fullName && !user?.firstName) { 
@@ -98,6 +102,7 @@ export default function AddBlog() {
       tags: data.tags.split(",").map(tag => tag.trim()), // Ensure 'tags' is a string and split it
       author: user.fullName || user.firstName || 'anonymous' ,
       publishedAt: new Date().toISOString(),
+      status: 'pending'
     };
 
     try {
@@ -115,11 +120,11 @@ export default function AddBlog() {
 
       // Create the new blog in Sanity
       await client.create(newBlog);
-      alert("Blog submitted successfully!");
+      toast.success("Blog is Uploaded Successfully")
       router.push("/");
     } catch (err) {
       console.error("Sanity error:", err);
-      alert("Submission failed! Please try again.");
+      toast.error("Submission failed! Please try again.");
     }
   };
 
@@ -128,6 +133,7 @@ export default function AddBlog() {
 
   return (
     <div className="w-full h-full flex items-center justify-center py-24 ">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="max-w-2xl mx-auto shadow-lg rounded-xl p-8 w-full md:max-w-[600px] bg-white ">
         <h1 className="text-3xl font-bold text-purple-700 mb-6 text-center">Add a New Blog</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -194,6 +200,10 @@ export default function AddBlog() {
             <div className="flex items-center space-x-4 justify-between pt-2">
             <p className="text-sm text-secondarygray">{new Date().toLocaleDateString()}</p>
             <p className="text-sm text-secondarygray">{user?.fullName}</p>
+            </div>
+            <div className="flex gap-2 items-center py-2">
+            <p className="text-sm font-Raleway text-secondary">Status:</p>
+            <p className="text-sm font-Raleway text-yellow-600">Pending</p>
             </div>
           </div>
 

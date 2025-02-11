@@ -6,6 +6,7 @@ import Newsletter from "./components/Newsletter";
 import Footer from "./components/Footer";
 import {ClerkProvider} from '@clerk/nextjs';
 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
+      
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -39,6 +41,7 @@ export default function RootLayout({
         <Footer/>
       </body>
     </html>
+    
     </ClerkProvider>
   );
 }

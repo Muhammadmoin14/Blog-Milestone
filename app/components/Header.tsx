@@ -45,7 +45,9 @@ function Header() {
                 {
                   isSignedIn ? (
                     <div className='flex gap-4 items-center '>
+                    <Link href='/user-dashboard'>
                     <div className='font-Raleway font-medium text-secondary md:text-lg '>{user?.firstName}</div>
+                    </Link>
                     <UserButton 
                     appearance={
                       {
