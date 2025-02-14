@@ -31,7 +31,7 @@ const formSchema = z.object({
   image: z
     .instanceof(File)
     .optional()
-    .refine((file) => file === null || file.size <= 5 * 1024 * 1024, "Image must be less than 5MB"),
+    .refine((file) => !file || (file.size <= 5 * 1024 * 1024), "Image must be less than 5MB"),
 });
 
 interface ImageAsset {
@@ -102,7 +102,7 @@ export default function AddBlog() {
       tags: data.tags.split(",").map(tag => tag.trim()), // Ensure 'tags' is a string and split it
       author: user.fullName || user.firstName || 'anonymous' ,
       publishedAt: new Date().toISOString(),
-      status: 'pending'
+      status: 'Pending'
     };
 
     try {
@@ -121,6 +121,7 @@ export default function AddBlog() {
       // Create the new blog in Sanity
       await client.create(newBlog);
       toast.success("Blog is Uploaded Successfully")
+      // console.log("success")
       router.push("/");
     } catch (err) {
       console.error("Sanity error:", err);

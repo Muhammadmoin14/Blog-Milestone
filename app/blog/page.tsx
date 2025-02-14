@@ -4,6 +4,7 @@ import { useState } from 'react'
 import TruncateDescription from '../components/TruncateDescription';
 import Link from 'next/link';
 import BlogGridSkeleton from '../components/GridSkeletonCard';
+import Image from 'next/image';
 
 
 
@@ -94,12 +95,17 @@ const Page = () => {
             className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col space-y-8 pb-6 hover:scale-105"
             >
             {article.urlToImage && (
-                <img
+                <div className="relative w-full h-60">
+                <Image
                 src={article.urlToImage}
                 alt={article.title}
-                className="w-full h-60 object-cover"
+                fill
+                style={{ objectFit: "cover" }}
+                className="rounded-t-lg"
+                priority
                 />
-            )}
+                </div>
+                )}
             
         
 
@@ -121,7 +127,7 @@ const Page = () => {
 
     {/* Grid end */}
     
-     <button className='bg-main px-8 py-3 text-white font-Roboto font-bold rounded-md' onClick={handleShowMore}> 
+     <button className='bg-main px-8 py-3 text-white font-Roboto font-bold rounded-md ' onClick={handleShowMore}> 
       Show More
     </button> 
 

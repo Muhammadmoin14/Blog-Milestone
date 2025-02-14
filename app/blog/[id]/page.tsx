@@ -2,6 +2,7 @@
 // import Image from 'next/image';
 import React, { useEffect, useState } from "react";
 import PopularBlog from "../../components/PopularBlog";
+import Image from "next/image";
 
 type datatype = {
   id: string;
@@ -67,11 +68,16 @@ const SpecificBlog = ({ params }: { params: { id: string } }) => {
       </div>
       <div>
         {blogPage.urlToImage && (
-          <img
-            src={blogPage.urlToImage}
-            alt={blogPage.title}
-            className="w-full h-full object-contain rounded-lg"
-          />
+          <div className="relative w-full h-auto "style={{ aspectRatio: "16/9" }}>
+            <Image
+              src={blogPage.urlToImage}
+              alt={blogPage.title}
+              fill
+              style={{ objectFit: "cover" }}
+              className="rounded-lg"
+              priority
+            />
+          </div>
         )}
       </div>
       <div className="md:px-8 sm:px-0">

@@ -3,6 +3,7 @@ import React from 'react'
 import { useState , useEffect } from 'react';
 import TruncateDescription from './TruncateDescription';
 import ReadmoreButton from './ReadmoreButton';
+import Image from 'next/image';
 
 type Blog = {
     id: string;
@@ -68,35 +69,36 @@ if (!blog) {
 
   return (
 
-    <div className='pt-10'>
-      {
-      <div
-      className="bg-[#FAFAFA] overflow-hidden flex flex-row space-x-6 pt-6  hover:scale-105"
-      >
-      {blog.urlToImage && (
-          <img
-          src={blog.urlToImage}
-          alt={blog.title}
-          className="w-full h-[450px] object-cover rounded-lg"
-          />
-      )}
-      
-  
-
-  <div className="flex flex-col space-y-4 px-6">
-      
-      <div className="flex justify-between items-center ">
-      <h6 className="text-xs font-bold text-secondary">{blog.author}</h6>
-      <h6 className="text-xs font-medium text-secondarygray break-words">{new Date(blog.publishedAt).toLocaleDateString()}</h6>
-      </div>
-      <div className="flex flex-col space-y-4  w-full ">
-      <h4 className='font-bold text-secondary break-words'>{blog.title}</h4>
-      <TruncateDescription description={blog.description} wordLimit={50}/>
-      <ReadmoreButton url={blog.url}/>
-      </div>
-  </div>
+    <div className="pt-10">
+  <div className="bg-[#FAFAFA] overflow-hidden flex flex-row space-x-6 pt-6 hover:scale-105">
+    {blog.urlToImage && (
+      <div className="relative w-1/2 h-[450px]">
+      <Image
+        src={blog.urlToImage}
+        alt={blog.title}
+        fill
+        style={{ objectFit: "cover" }}
+        className="rounded-lg"
+        priority
+      />
     </div>
-      }
+    
+    )}
+
+    <div className="flex flex-col space-y-4 px-6 w-1/2">
+      <div className="flex justify-between items-center">
+        <h6 className="text-xs font-bold text-secondary">{blog.author}</h6>
+        <h6 className="text-xs font-medium text-secondarygray break-words">
+          {new Date(blog.publishedAt).toLocaleDateString()}
+        </h6>
+      </div>
+      <div className="flex flex-col space-y-4 w-full">
+        <h4 className="font-bold text-secondary break-words">{blog.title}</h4>
+        <TruncateDescription description={blog.description} wordLimit={50} />
+        <ReadmoreButton url={blog.url} />
+      </div>
+    </div>
+  </div>
 </div>
   )
 }

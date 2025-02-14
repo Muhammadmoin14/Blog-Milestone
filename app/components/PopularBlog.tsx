@@ -5,7 +5,7 @@ import TruncateDescription from "../components/TruncateDescription";
 import Link from "next/link";
 import ViewmoreButton from "./Viewmore";
 import BlogGridSkeleton from "./GridSkeletonCard";
-
+import Image from "next/image";
 type datatype = {
   id: string;
   author: string;
@@ -74,7 +74,9 @@ const Page: React.FC<PopularPageProps> = ({ startingofPost, endingofPost }) => {
       )}
       {/* Grid Start */}
 
-      <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-6  w-full pt-6 ">
+
+
+      <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-6 w-full pt-6">
         {articles.slice(startingofPost, endingofPost).map((article) => (
           <Link
             href={`/blog/${article.id}`}
@@ -82,23 +84,25 @@ const Page: React.FC<PopularPageProps> = ({ startingofPost, endingofPost }) => {
             className="bg-[#FAFAFA] rounded-lg overflow-hidden flex flex-col space-y-6 pb-6 hover:scale-105"
           >
             {article.urlToImage && (
-              <img
-                src={article.urlToImage}
-                alt={article.title}
-                className="w-full h-60 object-cover "
-              />
+              <div className="relative w-full h-60">
+                <Image
+                  src={article.urlToImage}
+                  alt={article.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-t-lg"
+                />
+              </div>
             )}
 
             <div className="flex flex-col space-y-4 px-6">
-              <div className="flex justify-between items-center ">
-                <h6 className="text-xs font-bold text-secondary">
-                  {article.author}
-                </h6>
+              <div className="flex justify-between items-center">
+                <h6 className="text-xs font-bold text-secondary">{article.author}</h6>
                 <h6 className="text-xs font-medium text-secondarygray break-words">
                   {new Date(article.publishedAt).toLocaleDateString()}
                 </h6>
               </div>
-              <div className="flex space-y-4 flex-col w-full ">
+              <div className="flex space-y-4 flex-col w-full">
                 <h6 className="font-bold text-secondary break-words">
                   {article.title}
                 </h6>
@@ -110,7 +114,8 @@ const Page: React.FC<PopularPageProps> = ({ startingofPost, endingofPost }) => {
             </div>
           </Link>
         ))}
-      </div>
+      </div>;
+
 
       {/* Grid end */}
     </div>

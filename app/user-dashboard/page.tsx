@@ -38,7 +38,7 @@ const UserDashboard = () => {
   // Delete blog function
   const handleDelete = async (blogId: string) => {
     try {
-      const response = await fetch("/api/delete-blog", {
+      const response = await fetch("/api/blogs/delete-blog", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ blogId }),
@@ -59,7 +59,7 @@ const UserDashboard = () => {
   };
   const handleEditSave = async (updatedBlog: { id: string; title: string; description: string }) => {
     try {
-      await fetch(`/api/edit-blog`, {
+      await fetch(`/api/blogs/edit-blog`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedBlog),
@@ -110,10 +110,21 @@ const UserDashboard = () => {
                 </div>
                 <p className="text-gray-600 mt-1">{blog.description}</p>
                 <div>
-                  <div className="flex gap-2 items-center py-2">
-                    <p className="text-sm font-Raleway text-secondary">Status:</p>
-                    <p className="text-sm font-Raleway text-yellow-600">{blog.status}</p>
-                  </div>
+                <div className="flex gap-2 items-center py-2">
+                <p className="text-sm font-Raleway text-secondary">Status:</p>
+                <p
+                  className={`text-sm font-Raleway ${
+                    blog.status === "Pending"
+                      ? "text-yellow-600"
+                      : blog.status === "Approved"
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {blog.status}
+                </p>
+              </div>
+
                 </div>
                 <div className="flex space-x-2 mt-3">
                   <Button onClick={() => setEditBlog(blog)}  className="bg-[#7C4EE4] text-white px-4 py-1 rounded-md">

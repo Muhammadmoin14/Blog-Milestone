@@ -17,7 +17,7 @@ export const BlogType = defineType({
     }),
     defineField({ name: "author", type: "string" }),
     defineField({ name: "publishedAt", type: "datetime" }),
-    defineField({ name: "status", type: "string", title: "Status", options: { list: ["pending", "approved", "rejected"] }, initialValue: "pending" }),
+    defineField({ name: "status", type: "string", title: "Status", options: { list: ["Pending", "Approved", "Rejected"] }, initialValue: "Pending" }),
   ]
 });
 

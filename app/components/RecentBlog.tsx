@@ -7,7 +7,7 @@ import ViewmoreButton from "./Viewmore";
 import MainBlog from "./MainBlog";
 import SkeletonLoader from "./skeletonloader";
 import BlogGridSkeleton from "./GridSkeletonCard";
-
+import Image from "next/image";
 type datatype = {
   id: string;
   author: string;
@@ -55,28 +55,29 @@ const Page: React.FC<PopularPageProps> = ({ startingofPost, endingofPost }) => {
   }, []);
 
   return (
-    <div className="w-full h-full bg-[#FAFAFA] py-24  flex flex-col  space-y-6">
+
+
+    <div className="w-full h-full bg-[#FAFAFA] py-24 flex flex-col space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-secondary font-bold md:text-5xl sm:text-2xl">
           Recent Blog
         </h3>
         <ViewmoreButton />
       </div>
+      
       <div className="flex flex-row max-md:hidden">
         <MainBlog mainblog={33} />
       </div>
 
       {loading && (
-        // <p className="text-center font-semibold font-Raleway">Loading...</p>
         <div>
-        <SkeletonLoader type="blog-card" />
-        <BlogGridSkeleton count={3} />
+          <SkeletonLoader type="blog-card" />
+          <BlogGridSkeleton count={3} />
         </div>
       )}
 
       {/* Grid Start */}
-
-      <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-6  w-full pt-6 ">
+      <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-6 w-full pt-6">
         {articles.slice(startingofPost, endingofPost).map((article) => (
           <Link
             href={`/blog/${article.id}`}
@@ -84,15 +85,20 @@ const Page: React.FC<PopularPageProps> = ({ startingofPost, endingofPost }) => {
             className="bg-[#FAFAFA] rounded-lg overflow-hidden flex flex-col space-y-6 pb-6 hover:scale-105"
           >
             {article.urlToImage && (
-              <img
-                src={article.urlToImage}
-                alt={article.title}
-                className="w-full h-60 object-cover"
-              />
+              <div className="relative w-full h-60">
+                <Image
+                  src={article.urlToImage}
+                  alt={article.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className="rounded-t-lg"
+                  priority
+                />
+              </div>
             )}
 
             <div className="flex flex-col space-y-4 px-6">
-              <div className="flex justify-between items-center ">
+              <div className="flex justify-between items-center">
                 <h6 className="text-xs font-bold text-secondary">
                   {article.author}
                 </h6>
@@ -100,22 +106,19 @@ const Page: React.FC<PopularPageProps> = ({ startingofPost, endingofPost }) => {
                   {new Date(article.publishedAt).toLocaleDateString()}
                 </h6>
               </div>
-              <div className="flex space-y-4 flex-col w-full ">
+              <div className="flex space-y-4 flex-col w-full">
                 <h6 className="font-bold text-secondary break-words">
                   {article.title}
                 </h6>
-                <TruncateDescription
-                  description={article.description}
-                  wordLimit={30}
-                />
+                <TruncateDescription description={article.description} wordLimit={30} />
               </div>
             </div>
           </Link>
         ))}
       </div>
-
-      {/* Grid end */}
+      {/* Grid End */}
     </div>
+
   );
 };
 
